@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html中包含所有逻辑，测试webpack编译</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+</body>
+<!--<script src="./index.js">-->
+<script>
+    document.getElementById("app").innerHTML='ddddd';
+
+    // var aa = require('nodejs-demo-component-hello');
+    import aa from 'nodejs-demo-component-hello'
+    console.log("cccc")
+    aa.hello();
+</script>
+</html>
