@@ -1,0 +1,28 @@
+/**
+在750设计稿下，100px=13.33333333vw,1rem=100px；
+公式：100px=[100/(设计稿宽度*1%)]vw
+750宽度设计稿下：100px= 13.33333333vw
+650宽度设计稿下：100px= 15.384615vw
+ */
+html {
+    font-size: -webkit-calc(13.33333333vw);
+    font-size: calc(13.33333333vw);
+}
+
+/*浏览器宽度大于1024px时候，使用133.33px，不在进行放大
+133.33px=1024/750*100
+*/
+@media screen and (min-width: 1024px) {
+    html {
+        font-size: 136.5333px;
+    }
+}
+
+/*浏览器宽度小于321px时候，使用48px，不在进行缩小
+48=321/750*100
+*/
+@media screen and (max-width: 321px){
+    html {
+        font-size: 42.8px;
+    }
+}

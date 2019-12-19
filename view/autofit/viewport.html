@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0, user-scalable=no"/>
+    <title>Title</title>
+    <style type="text/css">
+        /*html{*/
+        /*    font-size: 100px;*/
+        /*    !*font-size: 625%;*!*/
+        /*}*/
+
+        body{
+            font-size: 0.16rem;
+        }
+
+        .div1{
+            width:1rem;
+            font-size: 0.4rem;
+        }
+        .div2{
+            width:2rem;
+            font-size: 0.4rem;
+        }
+        .div3{
+            width:3rem;
+            font-size: 0.4rem;
+        }
+        .div4{
+            width:3.75rem;
+            font-size: 0.4rem;
+        }
+        .div-font1{
+            font-size: 0.2rem;
+        }
+        .div-font2{
+            font-size: 0.4rem;
+        }
+    </style>
+</head>
+
+<body>
+<div class="div1" style="background-color: red;border: 0;padding:0;margin: 0;display: block">1rem</div>
+<div class="div2" style="background-color: green;border: 0;padding:0;margin: 0;display: block">2rem</div>
+<div class="div3" style="background-color: yellow;border: 0;padding:0;margin: 0;display: block">3rem</div>
+<div class="div4" style="background-color: coral;border: 0;padding:0;margin: 0;display: block">3.75rem</div>
+<div class="div-font1" style="background-color: cornsilk;border: 0;padding:0;margin: 0;display: block;">0.2rem字体大小</div>
+<div class="div-font2" style="background-color: cornsilk;border: 0;padding:0;margin: 0;display: block;">0.4rem字体大小</div>
+
+</body>
+<script>
+
+    /*  html font-size自适应值计算 pageFit start
+    * 最大宽度maxwidth，也作为UI设计稿宽度的标准
+    * 最小宽度minwidth
+    * ui作图宽度uiWidth
+    * html下的font-size
+    */
+    function pageFit(doc,win,maxwidth,minwidth,uiWidth,font) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                //最大最小width范围内，自由缩放
+                if(clientWidth>=minwidth&&clientWidth<=maxwidth){
+                    docEl.style.fontSize = font * (clientWidth / uiWidth) + 'px';
+                }
+                //超出最大宽度，误差校准,满足pc宽度，不进行缩放
+                else if(clientWidth>maxwidth){
+                    docEl.style.fontSize = font+'px';
+                }
+                //小于最小宽度，误差校准，
+                else if(clientWidth<minwidth){
+                    docEl.style.fontSize = font * (minwidth / maxwidth) + 'px';
+                }
+                console.log("doc fontsieze:"+docEl.style.fontSize);
+                console.log("clientWidth:"+clientWidth);
+
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    }
+    pageFit(document,window,1024,200,750,100);    //最大宽度maxwidth，最小宽度minwidth，html下的font-size
+    /*pageFit end*/
+</script>
+</html>
